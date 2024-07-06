@@ -1,51 +1,40 @@
+'use client'
 
-type Repo = {
-  id: number
-  name: string
-  stargazers_count: number
-  forks_count: number
-}
+import { useState } from "react";
 
-async function getData(): Promise<Repo[]> {
-  const res = await fetch('https://api.github.com/users/vercel/repos?page=1&per_page=5', { cache: 'no-store' })
+import Botao from "@/components/Botao";
+import Link from "next/link";
+import Table from "@/components/Table";
+import Username from "@/components/Username";
 
-  if (!res.ok) {
-    throw new Error('Failed to fetch data')
+
+export default function Home() {
+  const [numberPage, setNumberPage] = useState(1);
+  const [teste, setTeste] = useState([]);
+
+  function add() {
+    setNumberPage(1 + numberPage)
+  }
+  function remove() {
+    if(numberPage > 1){
+      setNumberPage(numberPage - 1)
+    }   
   }
 
-  return res.json()
-}
 
 
 
-
-
-
-export default async function Home() {
-  const response: Repo[] = await getData();
   return (
     <>
-
       <main>
         <h1 className="text-example">Pesquise um usuario do github</h1>
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Stars</th>
-              <th>Forks</th>
-            </tr>
-          </thead>
-          <tbody>
-            {response.map((repository) => (
-              <tr key={repository.id}>
-                <td>{repository.name}</td>
-                <td>{repository.forks_count}</td>
-                <td>{repository.stargazers_count}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <Username />
+
+        {/* <Botao /> */}
+        {numberPage}
+        <Table page={numberPage}/>
+        <Link onClick={() => add()} href={`/?page=${numberPage}`}  >Proxima pagina</Link>
+        <Link onClick={() => remove()} href={`/?page=${numberPage}`}  >Pagina anterior</Link>
 
       </main>
     </>

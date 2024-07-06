@@ -10,7 +10,8 @@ const config: Config = {
     extend: {
       width: {
         '1200': '75rem',
-        "responsive": '90%'
+        "responsive": '90%',
+        "maxx": '70%'
       },
       colors:{
         'example': 'var(--text-color)',

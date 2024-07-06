@@ -6,7 +6,7 @@ export default function Aside () {
 
     return (
         <aside className="rounded-lg bg-header-background py-10 px-4">
-            <Image src={logo}  alt=""/>
+            <Image className="m-h-full w-maxx" src={logo}  alt=""/>
         </aside>
     )
 
