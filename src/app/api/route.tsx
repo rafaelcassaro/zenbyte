@@ -17,9 +17,9 @@ export interface GithubJson {
 //     })
 // }
 
-export async function GET(page: number): Promise<GithubJson> {
+export async function GET(page: number, username: string): Promise<GithubJson> {
     try {
-      const response = await fetch(`http://localhost:3042/posts?_page=${page}&_per_page=4`)
+      const response = await fetch(`http://localhost:3042/posts?_page=${page}&_per_page=5`)
       if (!response.ok) {
         throw new Error('Erro ao buscar os dados');
       }

@@ -10,7 +10,7 @@ import Username from "@/components/Username";
 
 export default function Home() {
   const [numberPage, setNumberPage] = useState(1);
-  const [teste, setTeste] = useState([]);
+  const [username, setUsername] = useState('');
 
   function add() {
     setNumberPage(1 + numberPage)
@@ -20,21 +20,29 @@ export default function Home() {
       setNumberPage(numberPage - 1)
     }   
   }
+  function getUsername(user: string): void{
+    setUsername(user);
+  }
 
-
-
+  
 
   return (
     <>
       <main>
         <h1 className="text-example">Pesquise um usuario do github</h1>
-        <Username />
+        <Username 
+          getUsername={getUsername}
+        />
 
         {/* <Botao /> */}
         {numberPage}
-        <Table page={numberPage}/>
-        <Link onClick={() => add()} href={`/?page=${numberPage}`}  >Proxima pagina</Link>
+        <Table 
+          page={numberPage}
+          username={username}
+        />
+        
         <Link onClick={() => remove()} href={`/?page=${numberPage}`}  >Pagina anterior</Link>
+        <Link onClick={() => add()} href={`/?page=${numberPage}`}  >Proxima pagina</Link>
 
       </main>
     </>
