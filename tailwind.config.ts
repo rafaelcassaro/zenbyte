@@ -8,13 +8,16 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      padding: {
+        '1px': "1px"
+      },
       width: {
         '1200': '75rem',
         "responsive": '90%',
         "maxx": '70%'
       },
       colors:{
-        'example': 'var(--text-color)',
+        'weakblack': 'var(--text-color)',
         'header-background': 'var(--header-color)'
       }
     },

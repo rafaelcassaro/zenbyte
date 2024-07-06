@@ -3,12 +3,12 @@
 @tailwind utilities;
 
 :root{
-  --text-color: #8033FF;
+  --text-color: #171D1F;
   --header-color: #171D1F;
 }
 
 
 
 body{
-  background-color: rgb(212, 212, 212);
+  background-color: #f2f3f4;
 }

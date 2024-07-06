@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { GET } from "../../app/api/route"
 
-interface RepoListProps {
+interface TableProps {
     page: number;
     username: string;
 }
@@ -14,7 +14,7 @@ interface ApiData {
 }
 
 
-const Table = ({ page, username }: RepoListProps) => {
+const Table = ({ page, username }: TableProps) => {
     const [dados, setDados] = useState<ApiData[]>([]);
     const [filteredData, setFilteredData] = useState<ApiData[]>([]);
     const [searchInput, setSearchInput] = useState<string>('');
@@ -28,10 +28,10 @@ const Table = ({ page, username }: RepoListProps) => {
 
     useEffect(() => {
         const results = filteredData.filter(person =>
-          person.name.toLowerCase().includes(searchInput.toLowerCase())
+            person.name.toLowerCase().includes(searchInput.toLowerCase())
         );
         setDados(results);
-      }, [searchInput]);
+    }, [searchInput]);
 
 
     function sortStars() {
@@ -53,46 +53,55 @@ const Table = ({ page, username }: RepoListProps) => {
         setDados(reposArray)
     }
 
-    const onTyped = (evento:any) => {
+    const onTyped = (evento: any) => {
         setSearchInput(evento.target.value)
     }
 
-    
+
     return (
         <>
-            <br/>
-            <br/>
-            <input
-             type='text'
-             placeholder='Search a repository'
-             // value={username}
-             onChange={onTyped}
-            />
-            <br/>
-            <button onClick={sortStars}>sortStars</button>
-            <br/>
-            <button onClick={sortForks}>sortForks</button>
-            <br/>
-            <button onClick={sortName}>sortName</button>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Stars</th>
-                        <th>Forks</th>
-                    </tr>
-                </thead>
-                <tbody>
 
-                    {dados.map((repository) => (
-                        <tr key={repository.id}>
-                            <td>{repository.name}</td>
-                            <td>{repository.stargazers_count}</td>
-                            <td>{repository.forks_count}</td>
+            <section className="flex gap-5 justify-center items-center">
+                <label className="">FILTER</label>
+                <input
+                    className="mb-2 text-lg p-1 border-black border-solid border text-gray-900 "
+                    type='text'
+                    placeholder='Filter by name'
+                    // value={username}
+                    onChange={onTyped}
+                />
+
+                <button
+                    className="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+                    onClick={sortStars}>sortStars</button>
+
+                <button onClick={sortForks}>sortForks</button>
+
+                <button onClick={sortName}>sortName</button>
+            </section>
+
+
+            <section className="">
+                <table className="w-full border-black border-solid border-2">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Stars</th>
+                            <th>Forks</th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+
+                        {dados.map((repository) => (
+                            <tr key={repository.id}  >
+                                <td className="border-black border-solid border p-5">{repository.name}</td>
+                                <td className="border-black border-solid border p-5">{repository.stargazers_count}</td>
+                                <td className="border-black border-solid border p-5">{repository.forks_count}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </section>
         </>
     )
 }

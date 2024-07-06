@@ -15,8 +15,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-br">
-      <body>
-        <div className="flex h-screen gap-7 w-1200 max-w-responsive my-14 lg:mx-auto">
+      <body className="text-center">
+        <div className="flex h-screen gap-7 w-10/12 max-w-responsive my-14 lg:mx-auto">
           <Aside />
           {children}
         </div>
